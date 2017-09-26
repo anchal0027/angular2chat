@@ -1,0 +1,57 @@
+<div class="container">
+   <div class="row main">
+      <div class="main-login main-center">
+         <h5>Register Here</h5>
+         <div class="alert alert-danger" *ngIf="showerrormessage">{{errormessage}}</div>
+         <div class="alert alert-success" *ngIf="showsuccessmessage">{{successmessage}}</div>
+         <form class="" [formGroup]="registerForm" (ngSubmit)="submitForm(registerForm.value)">
+         <div class="form-group" [ngClass]="{'has-error':!registerForm.controls['name'].valid && registerForm.controls['name'].dirty}">
+            <label for="name" class="cols-sm-2 control-label"> Name</label>
+            <div class="cols-sm-10">
+               <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="uname" id="uname"  placeholder="Enter your Name" [formControl]="registerForm.controls['name']"/>
+               </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="registerForm.controls['name'].hasError('required') && registerForm.controls['name'].dirty">You must enter name!</div>
+            <div class="alert alert-danger" *ngIf="registerForm.controls['name'].hasError('minlength') && registerForm.controls['name'].dirty">Your  name must be at least 5 characters long!</div>
+            <div class="alert alert-danger" *ngIf="registerForm.controls['name'].hasError('maxlength') && registerForm.controls['name'].dirty">Your  name cannot exceed 8 characters!</div>
+         </div>
+         <div class="form-group" [ngClass]="{'has-error':!registerForm.controls['email'].valid && registerForm.controls['email'].touched}">
+            <label for="email" class="cols-sm-2 control-label">Your Email</label>
+            <div class="cols-sm-10">
+               <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"[formControl]="registerForm.controls['email']"/>
+               </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="registerForm.controls['email'].hasError('required') && registerForm.controls['email'].dirty">You must enter email!</div>
+            <div class="alert alert-danger" *ngIf="registerForm.controls['email'].hasError('pattern') && registerForm.controls['email'].dirty">You must correct email!</div>
+         </div>
+         <div class="form-group" [ngClass]="{'has-error':!registerForm.controls['password'].valid && registerForm.controls['password'].touched}">
+            <label for="password" class="cols-sm-2 control-label">Password</label>
+            <div class="cols-sm-10">
+               <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password" [formControl]="registerForm.controls['password']"/>
+               </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="!registerForm.controls['password'].valid && registerForm.controls['password'].dirty">You must enter password!</div>
+         </div>
+         <div class="form-group" [ngClass]="{'has-error':!registerForm.controls['confirmpassword'].valid && registerForm.controls['confirmpassword'].dirty}">
+            <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+            <div class="cols-sm-10">
+               <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password" [formControl]="registerForm.controls['confirmpassword']"/>
+               </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="!registerForm.controls['confirmpassword'].valid && registerForm.controls['confirmpassword'].dirty">You must confirm password!</div>
+         </div>
+         <div class="form-group ">
+            <button target="_blank" type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button" [disabled]="!registerForm.valid">Register</button>
+         </div>
+         </form>
+      </div>
+   </div>
+</div>

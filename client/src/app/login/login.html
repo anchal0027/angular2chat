@@ -1,0 +1,35 @@
+<div class="container">
+   <div class="row main">
+      <div class="main-login main-center">
+         <h5>Login Here</h5>
+         <div class="alert alert-danger" *ngIf="showerrormessage">{{errormessage}}</div>
+         <div class="alert alert-success" *ngIf="showsuccessmessage">{{successmessage}}</div> 
+         <form class="" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+        <div class="form-group" [ngClass]="{'has-error':!loginForm.controls['email'].valid && loginForm.controls['email'].touched}">
+            <label for="email" class="cols-sm-2 control-label">Email</label>
+            <div class="cols-sm-10">
+               <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"[formControl]="loginForm.controls['email']"/>
+               </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].dirty">You must enter email!</div>
+            <div class="alert alert-danger" *ngIf="loginForm.controls['email'].hasError('pattern') && loginForm.controls['email'].dirty">You must correct email!</div>
+         </div>
+         <div class="form-group" [ngClass]="{'has-error':!loginForm.controls['password'].valid && loginForm.controls['password'].touched}">
+            <label for="password" class="cols-sm-2 control-label">Password</label>
+            <div class="cols-sm-10">
+               <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                  <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password" [formControl]="loginForm.controls['password']"/>
+               </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].dirty">You must enter password!</div>
+         </div>
+         <div class="form-group ">
+            <button target="_blank" type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button" [disabled]="!loginForm.valid">Login</button>
+         </div>
+         </form>
+      </div>
+   </div>
+</div>
