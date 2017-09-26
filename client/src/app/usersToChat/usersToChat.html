@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="alert alert-info">You are {{loginuser}}<strong id="whoami"></strong></div>
+      <div class="panel panel-default">
+        <div class="panel-heading">Online Users</div>
+        <div class="col-md-12" style="padding:5px;" id="online-users" *ngFor=" let user of users">
+        <span *ngIf="user.name!=loginuser">{{user.name}}
+         <span style="float: right"><button type="button" class="btn btn-primary" (click)="startchat(user._id)">Start Chat</button></span></span>
+        </div>
+      </div>
+    </div>
+   <!--  <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Live Chat</div>
+        <ul class="list-group" id="chat-output"></ul>
+        <div class="panel-body">
+          <form id="chat">
+            <div class="input-group">
+              <input type="text" class="form-control" id="chat-input" />
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default">Send Message</button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
