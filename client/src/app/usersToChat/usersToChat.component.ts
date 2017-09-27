@@ -25,11 +25,14 @@ export class usersToChatPageComponent{
 			console.log("users are",this.users);
 		})
 	}
-	startchat(value:string){
-		console.log(">>>>>>>>>>>>>>>.value is",value);
+	startchat(value:string,name:string){
+		console.log(">>>>>>>>>>>>>>>.value is",value,name);
 		this.userid1=localStorage.getItem('userid1');
 		this.senddata={userid1:this.userid1,userid2:value}
-		this.apiservice.createroom(this.senddata).subscribe((result)=>this.result=result)
-		this.router.navigate(['/startchat']);
+		this.apiservice.createroom(this.senddata).subscribe((result)=>{
+		this.result=result;
+		console.log(">>>>>>>>>>>>result is",this.result);
+		})
+		this.router.navigate(['/startchat',name,this.result.room_id]);
 	}
 }

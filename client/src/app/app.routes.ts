@@ -8,5 +8,5 @@ export const route=[
 {path:'register',component:RegisterComponent},
 {path:'login',component:LoginComponent},
 {path:'chatpage',component:usersToChatPageComponent},
-{path:'startchat',component:startChatComponent}
+{path:'startchat/:name/:roomid',component:startChatComponent}
 ]

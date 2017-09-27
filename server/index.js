@@ -18,6 +18,7 @@ io.on('connection',(socket)=>{
 		console.log('The user is Disconnected');
 	});
 socket.on('add-message',(message)=>{
+	console.log(">>>>>>>>>>>>>>>message is",message);
 	console.log("server message",message);
 	io.emit('message',{type:'new-message',text:message});
 })
