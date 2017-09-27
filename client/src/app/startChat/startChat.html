@@ -3,17 +3,20 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">Live Chat</div>
-        <ul class="list-group" id="chat-output"></ul>
+        <ul class="list-group" id="chat-output">
+          <li *ngFor="let message of messages"> {{message.text}}</li>
+        </ul>
         <div class="panel-body">
           <form id="chat">
             <div class="input-group">
-              <input type="text" class="form-control" id="chat-input" />
+              <input type="text" class="form-control" id="chat-input" [(ngModel)]="message" [ngModelOptions]="{standalone: true}" />
               <span class="input-group-btn">
-                <button type="submit" class="btn btn-default">Send Message</button>
+                <button type="submit" class="btn btn-default"(click)="sendMessage()">Send Message</button>
               </span>
             </div>
           </form>
         </div>
+         {{message}}
       </div>
     </div>
   </div>
