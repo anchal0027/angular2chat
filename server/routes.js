@@ -89,7 +89,7 @@ router.get('/getusers',(req,res,next)=>{
 	})
 })
 router.post('/createroom',(req,res,next)=>{
-	console.log(">>>>>>>>>>>>>userid1",req.body.userid1)
+	console.log(">>>>>>>>>>>>>userid1",req.body.userid1);
 	validator.createroomvalidation(req.body, function (err, data) {
 		if (err) {
 			res.json({
@@ -100,37 +100,42 @@ router.post('/createroom',(req,res,next)=>{
 			next(err);
 		} 
 		else {
-			Room.findOne({userid1:req.body.userid1},(err,user)=>{
+			// Room.find( { $and: [ { userid1:req.body.userid1  }, { userid2: req.body.userid2 } ] } )
+			Room.find({ $and: [{$or:[{userid1:req.body.userid1},{userid1:req.body.userid2}]},{$or:[{userid2:req.body.userid2},{userid2:req.body.userid1}]}]},(err,user)=>{
+				console.log(">>>>>>>>>>>>>>>.user is",user);
+			if(user.length>0){
+				console.log("room already exists");
+			}
 			
+				else {
+			let newRoom = new Room({
+				userid1: req.body.userid1,
+				userid2: req.body.userid2,
+				
+				});
+			console.log(">>>>>>>>>>>>new user",newRoom);
+			newRoom.save((err, contact) => {
+				if (err) {
+					console.log("error is",err);
+					res.json({
+						error: 1,
+						message: "NO room created"
+					});
+					return next(err)
 
-				console.log("usersssssssssssssssssssss",user)
+				} else {
+					console.log("room created");
+					res.json({
+						success:true,
+						msg: 'Room Created'
+					});
+				}
 			})
 		}
-		// else {
-		// 	let newRoom = new Room({
-		// 		userid1: req.body.userid1,
-		// 		userid2: req.body.userid2,
-				
-		// 		});
-		// 	console.log(">>>>>>>>>>>>new user",newRoom);
-		// 	newRoom.save((err, contact) => {
-		// 		if (err) {
-		// 			console.log("error is",err);
-		// 			res.json({
-		// 				error: 1,
-		// 				message: "NO room created"
-		// 			});
-		// 			return next(err)
-
-		// 		} else {
-		// 			console.log("room created");
-		// 			res.json({
-		// 				success:true,
-		// 				msg: 'Room Created'
-		// 			});
-		// 		}
-		// 	})
-		// }
+			
+			})
+		}
+		
 	})
 })
 
