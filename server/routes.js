@@ -104,8 +104,11 @@ router.post('/createroom',(req,res,next)=>{
 			Room.find({ $and: [{$or:[{userid1:req.body.userid1},{userid1:req.body.userid2}]},{$or:[{userid2:req.body.userid2},{userid2:req.body.userid1}]}]},(err,user)=>{
 				console.log(">>>>>>>>>>>>>>>.user is",user);
 			if(user.length>0){
+				console.log(">>>>>>>>>>>>>>>.user is inside if",user[0]._id);
+				res.json({msg:"room already exists",room_id:user[0]._id})
 				console.log("room already exists");
 			}
+		
 			
 				else {
 			let newRoom = new Room({
@@ -114,7 +117,7 @@ router.post('/createroom',(req,res,next)=>{
 				
 				});
 			console.log(">>>>>>>>>>>>new user",newRoom);
-			newRoom.save((err, contact) => {
+			newRoom.save((err,room) => {
 				if (err) {
 					console.log("error is",err);
 					res.json({
@@ -127,7 +130,8 @@ router.post('/createroom',(req,res,next)=>{
 					console.log("room created");
 					res.json({
 						success:true,
-						msg: 'Room Created'
+						msg: 'Room Created',
+						room_id:room._id
 					});
 				}
 			})
