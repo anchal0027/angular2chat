@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 	
 })
 export class startChatComponent implements OnInit {
-	messages=[];
+	messages:any;
 	connection;
 	message;
 	private sub: any;
@@ -31,12 +31,15 @@ export class startChatComponent implements OnInit {
     this.message = '';
   }
   ngOnInit() {
+  	console.log(">>>>>>>>>>>>>>>>>....oninit calle")
    this.sub = this.route.params.subscribe(params => {
        this.reciever = params['name']; 
        this.roomid=params['roomid']; 
     });
     this.connection = this.chatservice.getMessages().subscribe(message => {
-      this.messages.push(message);
+    	console.log(">>>>>>>>>>>.on init messages are",message);
+      this.messages=message['text']
+      console.log(">>>>>>>>>>>>>>>>>>>messages are",this.messages);
     })
   }
   // Let's unsubscribe our Observable

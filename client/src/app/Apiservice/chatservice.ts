@@ -12,6 +12,7 @@ export class chatService{
 		let observable=new Observable(observer=>{
 			this.socket=io(this.url);
 			this.socket.on('message',(data)=>{
+				console.log(">>>>>>>>>>>>>>>>>data")
 				observer.next(data);
 			});
 			return()=>{
