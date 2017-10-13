@@ -1,13 +1,20 @@
 var mongoose=require('mongoose');
 const messageSchema=mongoose.Schema({
 	sender:{
-		type:String;
+		type:String
 	},
 	reciever:{
-		type:String;
+		type:String
 	},
 	message:{
-		type:String;
+		type:String
+	},
+	date:{
+		type:String
+	},
+	roomid:{
+		type:String
 	}
+
 })
 module.exports=mongoose.model('messages',messageSchema);

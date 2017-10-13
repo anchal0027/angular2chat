@@ -31,8 +31,13 @@ export class usersToChatPageComponent{
 		this.senddata={userid1:this.userid1,userid2:value}
 		this.apiservice.createroom(this.senddata).subscribe((result)=>{
 		this.result=result;
-		console.log(">>>>>>>>>>>>result is",this.result);
-		})
+		console.log(">>>>>>>>>>>>>>>>>>.result of create room is",this.result);
 		this.router.navigate(['/startchat',name,this.result.room_id]);
+		
+		},(error)=>{
+			console.log(">>>>>>>>>>>.error is",error);
+		})
+		console.log(">>>>>>>>>>>>result is",this.result);
+		
 	}
 }
